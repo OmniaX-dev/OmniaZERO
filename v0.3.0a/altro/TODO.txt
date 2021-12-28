@@ -1,0 +1,12 @@
+properly reorganize files
+documentation
+
+Proper errors
+animation groups
+
+create all colors
+
+map values for matrix
+
+rename local variables in core
+create gamedata

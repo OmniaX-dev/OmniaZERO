@@ -1,0 +1,29 @@
+add top bar
+work on entities
+	multi-tile entities
+		-boats
+create a method to destroy stringtokens
+figure out why filter color doesn't work
+game light-pause when messagebox shown
+messagebox chain
+
+
+
+
+
+properly reorganize files
+documentation
+
+Proper errors
+animation groups
+
+create all colors
+
+map values for matrix
+
+rename local variables in core
+create gamedata
+
+
+-------------EVENTS--------
+000000       00

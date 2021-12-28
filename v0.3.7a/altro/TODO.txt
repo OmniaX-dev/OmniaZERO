@@ -1,0 +1,27 @@
+use indices for colors in serialized maps
+add top bar
+work on entities
+	multi-tile entities
+		-boats
+
+
+
+
+
+
+properly reorganize files
+documentation
+
+Proper errors
+animation groups
+
+create all colors
+
+map values for matrix
+
+rename local variables in core
+create gamedata
+
+
+-------------EVENTS--------
+000000       00

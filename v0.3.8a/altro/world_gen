@@ -1,0 +1,147 @@
+/*oz_CharData cd;
+cd.ascii = 205;
+cd.color = DefaultColors.PURPLE_ON_BLACK;
+for (int i = 0; i < WIDTH; i++)
+{
+	world.rooms[0].map[i][0].sprite = oz_buildStaticAnimation(cd);
+	world.rooms[0].map[i][0].solid = true;
+	world.rooms[0].map[i][HEIGHT - 1].sprite = oz_buildStaticAnimation(cd);
+	world.rooms[0].map[i][HEIGHT - 1].solid = true;
+}
+cd.ascii = 186;
+for (int i = 0; i < HEIGHT; i++)
+{
+	world.rooms[0].map[0][i].sprite = oz_buildStaticAnimation(cd);
+	world.rooms[0].map[0][i].solid = true;
+	world.rooms[0].map[WIDTH - 1][i].sprite = oz_buildStaticAnimation(cd);
+	world.rooms[0].map[WIDTH - 1][i].solid = true;
+}
+world.rooms[0].map[0][0].sprite.frames[0].ascii = 201;
+world.rooms[0].map[WIDTH - 1][0].sprite.frames[0].ascii = 187;
+world.rooms[0].map[0][HEIGHT - 1].sprite.frames[0].ascii = 200;
+world.rooms[0].map[WIDTH - 1][HEIGHT - 1].sprite.frames[0].ascii = 188;
+
+cd.ascii = 217;
+cd.color = DefaultColors.DARK_GREEN_T;
+world.rooms[1].map[20][20].sprite = oz_buildStaticAnimation(cd);
+world.rooms[1].map[20][20].solid = true;
+*/
+
+/*oz_CharData cds2[5] = {
+	{',', {BG_BLUE, FG_DARK_BLUE, false}},
+	{')', {BG_BLUE, FG_DARK_AQUA, false}},
+	{' ', {BG_BLUE, FG_DARK_BLUE, false}},
+	{'.', {BG_BLUE, FG_DARK_BLUE, false}},
+	{' ', {BG_BLUE, FG_DARK_BLUE, false}}
+};
+
+oz_CharData cds3 = {178, DefaultColors.DARK_YELLOW_ON_YELLOW};
+oz_Animation anim2 = oz_buildRndAnimation(5, 1, 10, true, true);
+oz_fillAnimation(&anim2, cds2);
+drawCircle(12, (struct _point){20, 20}, oz_buildStaticAnimation(cds3), false);
+drawCircle(10, (struct _point){20, 20}, anim2, true);
+
+
+
+oz_Room oz_buildRoom(void)
+{
+	oz_Room room;
+	oz_CharData cds[4] = {
+		{161, DefaultColors.GREEN_ON_DARK_GREEN},
+		{140, DefaultColors.GREEN_ON_DARK_GREEN},
+		{141, DefaultColors.GREEN_ON_DARK_GREEN},
+		{139, DefaultColors.GREEN_ON_DARK_GREEN},
+	};
+	int rnd = 0;
+	char c = 0;
+	int tmp = 1;
+	oz_CharData cd;
+	cd.ascii = ' ';
+	cd.color = DefaultColors.GREEN_ON_DARK_GREEN;
+	room.width = WIDTH;
+	room.height = HEIGHT;
+	for (int y = 0; y < HEIGHT; y++)
+	{
+		for (int x = 0; x < WIDTH; x++)
+		{
+			room.map[x][y].x = x;
+			room.map[x][y].y = y;
+			rnd = rand() % 100;
+			if (rnd > 95)
+			{
+				room.map[x][y].sprite = oz_buildRndAnimation(4, 1, 5, true, true);
+				oz_fillAnimation(&(room.map[x][y].sprite), cds);
+			}
+			else
+			{
+				room.map[x][y].sprite = oz_buildStaticAnimation(cd);
+			}
+			room.map[x][y].solid = false;
+		}
+	}
+	return room;
+}
+
+oz_World oz_buildWorld(int n_rooms, bool build_rooms)
+{
+	oz_World w;
+	w.rooms = alloc_array(oz_Room, n_rooms);
+	if (!build_rooms)
+		return w;
+	for (int i = 0; i < n_rooms; i++)
+		w.rooms[i] = oz_buildRoom();
+	return w;
+}
+
+
+void drawCircle(int radius, oz_Point origin, oz_Animation anim, bool solid)
+{
+	oz_Tile* tile = NULL;
+	for(int y = -radius; y <= radius; y++)
+	{
+	    for(int x = -radius; x <= radius; x++)
+		{
+	        if(x * x + y * y <= radius * radius * 0.5f)
+			{
+				tile = &world.rooms[0].map[origin.x + x][origin.y + y];
+				tile->sprite = anim;
+				tile->solid = solid;
+			}
+		}
+	}
+}
+
+void draw_house(int xx, int yy, int width, int height)
+{
+	oz_CharData brick = {178, {BG_LIGHT_GRAY, FG_GRAY, false}};
+	oz_CharData roof = {177, {BG_RED, FG_DARK_RED, false}};
+	oz_CharData door = {178, {BG_PINK, FG_PURPLE, false}};
+	oz_CharData window = {178, {BG_AQUA, FG_DARK_AQUA, false}};
+
+	for (int y = yy; y < yy + height; y++)
+	{
+		for (int x = xx; x < xx + width; x++)
+		{
+			world.rooms[0].map[x][y].sprite = oz_buildStaticAnimation(brick);
+			world.rooms[0].map[x][yy - 2].sprite = oz_buildStaticAnimation(roof);
+			world.rooms[0].map[x][y].solid = true;
+			world.rooms[0].map[x][yy - 2].solid = true;
+		}
+	}
+
+	for (int x = xx - 1; x < xx + width + 1; x++)
+	{
+		world.rooms[0].map[x][yy - 1].sprite = oz_buildStaticAnimation(roof);
+		world.rooms[0].map[x][yy - 1].solid = true;
+	}
+	for (int x = xx + 1; x <  xx + width - 1; x++)
+	{
+		world.rooms[0].map[x][yy - 3].sprite = oz_buildStaticAnimation(roof);
+		world.rooms[0].map[x][yy - 3].solid = true;
+	}
+
+	world.rooms[0].map[xx + (width / 2)][yy + height - 1].sprite = oz_buildStaticAnimation(door);
+	world.rooms[0].map[xx + (width / 2)][yy + height - 1].solid = false;
+	world.rooms[0].map[xx + 1][yy + 1].sprite = oz_buildStaticAnimation(window);
+	world.rooms[0].map[xx + width - 2][yy + 1].sprite = oz_buildStaticAnimation(window);
+}

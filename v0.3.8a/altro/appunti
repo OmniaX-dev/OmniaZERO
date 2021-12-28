@@ -1,0 +1,33 @@
+
+/*
+COLORREF palette[16] =
+{
+	0x00000000, 0x00800000, 0x00008000, 0x00808000,
+	0x00000080, 0x00800080, 0x00008080, 0x00c0c0c0,
+	0x00808080, 0x00ff0000, 0x0000ff00, 0x00ffff00,
+	0x000000ff, 0x00ff00ff, 0x0000ffff, 0x00ffffff
+};
+for (int y = 0; y < HEIGHT; y++)
+{
+	for (int x = 0; x < WIDTH; x++)
+	{
+		//buffer[x + (WIDTH * y)].Char.AsciiChar = (char)219;
+		buffer[x + (WIDTH * y)].Attributes = rand() % 256;
+	}
+}*/
+
+
+
+//SetConsolePalette(palette, 0, 0, L"Consolas");
+
+
+	int xy = _1D(x, y);
+	char c;
+	for (int i = 0; i < MAX_STR_LEN; i++)
+	{
+		c = str[i];
+		if (c == '\0')
+			return;
+		buffer[xy + i].Char.AsciiChar = c;
+		buffer[xy + i].Attributes = color;
+	}

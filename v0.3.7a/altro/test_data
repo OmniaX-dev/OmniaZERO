@@ -1,0 +1,3 @@
+{ID; ascii, fg_c, bg_c, trans : ascii, fg_c, bg_c, trans : ascii fg_c, bg_c, trans}
+
+implement indexof, trim

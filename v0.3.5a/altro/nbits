@@ -1,0 +1,37 @@
+color: 17 bit
+	bg_color: 8 bit
+	fg_color: 8 bit
+	transparent_bg: 1 bit
+
+chardata: 25 bit
+	ascii: 8 bit
+	color: 17 bit
+
+rndnfo: 18 bit
+	min_delay: 8 bit
+	max_delay: 8 bit
+	rnd_delay: 1 bit
+	rnd_frames: 1 bit
+
+animation:
+	frame_count: 5 bit
+	_static: 1 bit
+	delay: 8 bit
+	random: 18 bit
+	frames: (frame_count * 25 bit)
+
+tile:
+	solid: 1 bit
+	x: 7 bit
+	y: 7 bit
+	sprite: anim_size
+
+entity:
+	speed: 8 bit
+	position.x: 7 bit
+	position.y: 7 bit
+	sprite: anim_size
+
+ANIMATION
+frame_count   _static   delay      min_delay   max_delay   rnd_delay   rnd_frames
+00000         0         00000000   00000000    00000000    0           0
